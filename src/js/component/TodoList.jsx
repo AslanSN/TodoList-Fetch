@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-
-/**
- * TODO: List
- */
 //Styles
 import todoList from "../../styles/todoList.scss";
+/**
+ * TODO: APIS
+ */
 
 /**
  * !Creates a Todos' list component
