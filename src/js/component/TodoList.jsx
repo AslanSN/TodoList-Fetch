@@ -1,20 +1,10 @@
 import React, { useState } from "react";
 
-//Styles
-import todoList from "../../styles/todoList.scss";
-/**
- * TODO: APIS
- */
+import "../../styles/TodoList.scss";
 
-/**
- * !Creates a Todos' list component
- * @returns HTML
- */
 const TodoList = () => {
-	//Hooks
 	const [list, setList] = useState([]);
 
-	//Models
 	/**
 	 * !Creator
 	 * ?Creates a Model
@@ -66,41 +56,56 @@ const TodoList = () => {
 	 * @param {string} value
 	 * @param {index} i
 	 */
-	const listing = (value, i) => {
-		return (
-			<div className="row m-1">
-				<div className="col-sm-10 col-lg-10">
-					<li key={i} className="list align-bottom d-inline">
-						{value}
-					</li>
-				</div>
-				<div className="col-sm-2 col-lg-2">
-					<button
-						type="button"
-						className="btn  d-inline"
-						onClick={() => erase(i)}>
-						x
-					</button>
-				</div>
+	const listing = (value, i) => (
+		<div className="row m-1">
+			<div className="col-sm-10 col-lg-10">
+				<li key={i} className="list align-bottom d-inline">
+					{value}{" "}
+				</li>
 			</div>
+			<div className="col-sm-2 col-lg-2">
+				<button
+					type="button"
+					className="btn  d-inline"
+					onClick={() => erase(i)}>
+					x
+				</button>
+			</div>
+		</div>
+	);
+
+	const AllItems = () =>
+		list.length > 0 ? (
+			<span className="text-start align-bot Tasks">
+				<em>{list.length} tasks</em>
+			</span>
+		) : (
+			""
 		);
-	};
 
 	return (
 		<>
-			<input
-				type="text"
-				placeholder="Your new task is..."
-				className="form"
-				onKeyUp={saveTask}></input>
+			<div className="container">
+				<div className="text-center mt-5 shadow p-3 mb-5 bg-body rounded display">
+					<h1 className="title">todos</h1>
+					<input
+						type="text"
+						placeholder="Your new task is..."
+						className="form"
+						onKeyUp={saveTask}></input>
 
-			<ul>{list.map(listing)}</ul>
-			<button
-				type="button"
-				className="btn btn-dark m-2"
-				onClick={() => eraseAll()}>
-				Erase All
-			</button>
+					<ul>{list.map(listing)}</ul>
+
+					<AllItems />
+
+					<button
+						type="button"
+						className="btn btn-dark m-2 text-end"
+						onClick={() => eraseAll()}>
+						Erase All
+					</button>
+				</div>
+			</div>
 		</>
 	);
 };

@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.display{
+    width: min-content;  
+}
+
+.title{
+    font-family: 'Comfortaa', cursive;
+    color: rgba(148, 165, 165, 0.747);
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+input{
+    border: none;
+    border-radius: 5px;
+}
+
+.list, .form {
+    font-family: 'Flamenco', cursive;
+    font-weight: xx-bold;
+    font-size: x-large;
+    vertical-align: bottom;
+}
+
+.Tasks {
+    color: rgba(128, 128, 128, 0.74);
+    font-family: 'Comfortaa', cursive;
+}
+
+.btn {
+    font-family: 'Comfortaa', cursive;
+}
