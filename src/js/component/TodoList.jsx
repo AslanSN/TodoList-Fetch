@@ -74,6 +74,11 @@ const TodoList = () => {
 		</div>
 	);
 
+	/**
+	 * !Tasks counter
+	 * @param {Array} list
+	 * @returns task number in HTML
+	 */
 	const AllItems = () =>
 		list.length > 0 ? (
 			<span className="text-start align-bot Tasks">
