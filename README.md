@@ -18,10 +18,12 @@ All the functions are working and the familly font for the main list and the inp
 Open your workspace cloning or, if you have GitPod installed, just click the button.
 
 Then **install node.js**. For this you must type this in your **terminal**:
-`    npm install`
+
+`npm install`
 
 Now just run it typing:
-    npm run start
+
+`npm run start`
 
 ------------
 
