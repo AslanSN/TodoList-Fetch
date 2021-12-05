@@ -1,5 +1,6 @@
 # To-do list with React
 Exercise where we had to copy with our own code this template: 
+
 [![Template](https://raw.githubusercontent.com/breatheco-de/exercise-todo-list/master/preview.gif)](http://https://raw.githubusercontent.com/breatheco-de/exercise-todo-list/master/preview.gif)
 
 ## My code
@@ -29,4 +30,4 @@ Now just run it typing:
 
 _Thank you for reading,_
 
-_AslanSN_
+_**AslanSN**_
