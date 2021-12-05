@@ -27,4 +27,6 @@ Now just run it typing:
 
 ------------
 
-_Thank you for Reading_
+_Thank you for reading,_
+
+_AslanSN_
