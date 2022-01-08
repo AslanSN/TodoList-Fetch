@@ -1,20 +1,56 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import "../../styles/TodoList.scss";
 
+/**
+ * !TodoList component
+ * * AslanSN 2022-01-07
+ * @returns Component containing a todo task register
+ */
 const TodoList = () => {
 	const [list, setList] = useState([]);
+	const [tick, setTick] = useState(false);
 
-	/**
-	 * !Creator
-	 * ?Creates a Model
-	 * @param {string} label
-	 * @param {boolean} done
-	 *
-	 */
 	function Task(label, done) {
-		(this.label = ""), (this.done = false);
+		(this.label = label), (this.done = false);
 	}
+
+
+	useEffect(() => {
+
+		setTick = true;
+		console.log(`Tick is changed to true?: ${tick}`)
+
+		fetch("https://assets.breatheco.de/apis/fake/todos/", {
+			method: "GET",
+			headers: {
+				"Accept": "application/json"
+			}
+		}).then((response) => {
+			response.json();
+		}).then((data) => {
+			setList(data);
+		}).catch((err) => {
+
+		})
+	}, []);
+
+	useEffect(() => {
+		tick === true ? 
+			fetch("https://assets.breatheco.de/apis/fake/todos/", {
+				method: "PUT",
+				headers: {
+					"Accept": "application/json"
+				}
+			}).then((response) => {
+				response.json();
+			}).then((data) => {
+				setList(data);
+			}).catch((err) => {
+				
+			}) 
+		: null 
+		&& console.log(`Tick should be still be false: ${tick}`);
+	}, [list]);
 
 	/**
 	 * !Saver and controller
@@ -58,17 +94,17 @@ const TodoList = () => {
 	 */
 	const listing = (value, i) => (
 		<div className="row m-1">
-			<div className="col-sm-10 col-lg-10">
-				<li key={i} className="list align-bottom d-inline">
+			<div className="col col-sm-11 col-lg-11">
+				<li key={i} className="list text-break align-bottom d-inline">
 					{value}{" "}
 				</li>
 			</div>
-			<div className="col-sm-2 col-lg-2">
+			<div className="col align-middle col-sm-1 col-lg-1">
 				<button
 					type="button"
-					className="btn  d-inline"
+					className="col x btn align-middle d-inline"
 					onClick={() => erase(i)}>
-					x
+					X
 				</button>
 			</div>
 		</div>
@@ -81,7 +117,7 @@ const TodoList = () => {
 	 */
 	const AllItems = () =>
 		list.length > 0 ? (
-			<span className="text-start align-bot Tasks">
+			<span className="text-start align-bot tasks">
 				<em>{list.length} tasks</em>
 			</span>
 		) : (
@@ -91,12 +127,12 @@ const TodoList = () => {
 	return (
 		<>
 			<div className="container">
-				<div className="text-center mt-5 shadow p-3 mb-5 bg-body rounded display">
-					<h1 className="title">todos</h1>
+				<div className="column text-center mt-5 shadow p-3 mb-5 bg-body rounded display">
+					<h1 className="title">TODOS</h1>
 					<input
 						type="text"
 						placeholder="Your new task is..."
-						className="form"
+						className="form mb-3 light"
 						onKeyUp={saveTask}></input>
 
 					<ul>{list.map(listing)}</ul>
