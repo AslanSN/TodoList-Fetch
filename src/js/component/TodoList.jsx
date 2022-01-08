@@ -2,13 +2,25 @@ import React, { useState, useEffect } from "react";
 import "../../styles/TodoList.scss";
 
 /**
+ * !TodoList.jsx
+ * * Done by: AslanSN
+ * * 2021-12-14
+ * ? TodoList component that creates an interactive todo list display 
+ * ? and updates it with the done API
+ */
+
+
+/**
  * !TodoList component
  * * AslanSN 2022-01-07
  * @returns Component containing a todo task register
  */
 const TodoList = () => {
 	const [list, setList] = useState([]);
-	const [tick, setTick] = useState(false);
+	const [tick, setTick] = useState({
+		used: 0,
+	});
+	const [error, setError] = useState("");
 
 	function Task(label, done) {
 		(this.label = label), (this.done = false);
@@ -17,8 +29,8 @@ const TodoList = () => {
 
 	useEffect(() => {
 
-		setTick = true;
-		console.log(`Tick is changed to true?: ${tick}`)
+		setTick.used = 1;
+		console.log(`Tick is changed to 1?: ${tick}`)
 
 		fetch("https://assets.breatheco.de/apis/fake/todos/", {
 			method: "GET",
@@ -30,26 +42,38 @@ const TodoList = () => {
 		}).then((data) => {
 			setList(data);
 		}).catch((err) => {
-
+			setError(err);
 		})
 	}, []);
 
 	useEffect(() => {
-		tick === true ? 
-			fetch("https://assets.breatheco.de/apis/fake/todos/", {
+		tick.used > 1 ? 
+
+			setTick.used += 1
+
+			&& fetch("https://assets.breatheco.de/apis/fake/todos/", 
+				{
 				method: "PUT",
 				headers: {
 					"Accept": "application/json"
 				}
-			}).then((response) => {
+			})
+			.then((response) => 
+			{
 				response.json();
-			}).then((data) => {
+			})
+			.then((data) => 
+			{
 				setList(data);
-			}).catch((err) => {
-				
+			})
+			.catch((err) => 
+			{
+				setError(err);
 			}) 
-		: null 
-		&& console.log(`Tick should be still be false: ${tick}`);
+
+		: null
+
+		&& console.log(`Tick should be still be more than 1: ${tick}`);
 	}, [list]);
 
 	/**
