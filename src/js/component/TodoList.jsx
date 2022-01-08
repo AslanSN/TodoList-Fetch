@@ -16,21 +16,20 @@ const TodoList = () => {
 	}
 
 	useEffect(() => {
-		fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
-			method: "POST",
-			headers: {
-				Accept: "application/json"
-			},
-			body: list
-		})
-			.then(setUsed(+1))
-			.catch(err => {
-				setError(err);
-				console.error(error);
-			});
-
-		list.length > 0
+		list.length == 0
 			? fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
+					method: "POST",
+					headers: {
+						Accept: "application/json"
+					},
+					body: list
+			  })
+					.then(setUsed(+1))
+					.catch(err => {
+						setError(err);
+						console.error(error);
+					})
+			: fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
 					method: "GET",
 					headers: {
 						Accept: "application/json"
@@ -46,8 +45,7 @@ const TodoList = () => {
 					.catch(err => {
 						setError(err);
 						console.error(error);
-					})
-			: null;
+					});
 	}, []);
 
 	useEffect(() => {
