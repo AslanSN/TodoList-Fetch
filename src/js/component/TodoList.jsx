@@ -2,15 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../../styles/TodoList.scss";
 
 /**
- * !TodoList.jsx
- * * Done by: AslanSN
- * * 2021-12-14
- * ? TodoList component that creates an interactive todo list display 
- * ? and updates it with the done API
- */
-
-
-/**
  * !TodoList component
  * * AslanSN 2022-01-07
  * @returns Component containing a todo task register
@@ -21,57 +12,63 @@ const TodoList = () => {
 	const [error, setError] = useState("");
 
 	function Task(label, done) {
-		(this.label = label), (this.done = false);
+		(this.label = label), (this.done = done);
 	}
 
-
 	useEffect(() => {
-
-		setUsed = 1;
-		console.log(`Used is changed to 1?: ${used}`)
-
-		fetch("https://assets.breatheco.de/apis/fake/todos/", {
-			method: "GET",
+		fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
+			method: "POST",
 			headers: {
-				"Accept": "application/json"
-			}
-		}).then((response) => {
-			response.json();
-		}).then((data) => {
-			setList(data);
-		}).catch((err) => {
-			setError(err);
+				Accept: "application/json"
+			},
+			body: list
 		})
+			.then(setUsed(+1))
+			.catch(err => {
+				setError(err);
+				console.error(error);
+			});
+
+		list.length > 0
+			? fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
+					method: "GET",
+					headers: {
+						Accept: "application/json"
+					}
+			  })
+					.then(response => {
+						response.json();
+					})
+					.then(data => {
+						setList(data);
+						setUsed(+1);
+					})
+					.catch(err => {
+						setError(err);
+						console.error(error);
+					})
+			: null;
 	}, []);
 
 	useEffect(() => {
-		used > 1 ? 
-
-			setUsed += 1
-
-			&& fetch("https://assets.breatheco.de/apis/fake/todos/", 
-				{
-				method: "PUT",
-				headers: {
-					"Accept": "application/json"
-				}
-			})
-			.then((response) => 
-			{
-				response.json();
-			})
-			.then((data) => 
-			{
-				setList(data);
-			})
-			.catch((err) => 
-			{
-				setError(err);
-			}) 
-
-		: null
-
-		&& console.log(`Used should be still be more than 1: ${tick}`);
+		used >= 1
+			? fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
+					method: "PUT",
+					headers: {
+						Accept: "application/json"
+					},
+					body: list
+			  })
+					.then(response => {
+						response.json();
+					})
+					.then(setUsed(+1))
+					.catch(err => {
+						setError(err);
+						console.log(error);
+					})
+			: null &&
+			  console.log(`Used should be still be more than 1: ${used}`);
 	}, [list]);
 
 	/**
@@ -117,7 +114,9 @@ const TodoList = () => {
 	const listing = (value, i) => (
 		<div className="row m-1">
 			<div className="col col-sm-11 col-lg-11">
-				<li key={i} className="list text-break align-bottom d-inline">
+				<li
+					key={i.toString()}
+					className="list text-break align-bottom d-inline">
 					{value}{" "}
 				</li>
 			</div>
