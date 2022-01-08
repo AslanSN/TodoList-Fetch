@@ -17,9 +17,7 @@ import "../../styles/TodoList.scss";
  */
 const TodoList = () => {
 	const [list, setList] = useState([]);
-	const [tick, setTick] = useState({
-		used: 0,
-	});
+	const [used, setUsed] = useState(0);
 	const [error, setError] = useState("");
 
 	function Task(label, done) {
@@ -29,8 +27,8 @@ const TodoList = () => {
 
 	useEffect(() => {
 
-		setTick.used = 1;
-		console.log(`Tick is changed to 1?: ${tick}`)
+		setUsed = 1;
+		console.log(`Used is changed to 1?: ${used}`)
 
 		fetch("https://assets.breatheco.de/apis/fake/todos/", {
 			method: "GET",
@@ -47,9 +45,9 @@ const TodoList = () => {
 	}, []);
 
 	useEffect(() => {
-		tick.used > 1 ? 
+		used > 1 ? 
 
-			setTick.used += 1
+			setUsed += 1
 
 			&& fetch("https://assets.breatheco.de/apis/fake/todos/", 
 				{
@@ -73,7 +71,7 @@ const TodoList = () => {
 
 		: null
 
-		&& console.log(`Tick should be still be more than 1: ${tick}`);
+		&& console.log(`Used should be still be more than 1: ${tick}`);
 	}, [list]);
 
 	/**
