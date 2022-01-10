@@ -9,7 +9,7 @@
 
 .title{
     font-family: 'Comfortaa', cursive;
-    color: rgba(148, 165, 165, 0.747);
+    color: rgba(0, 51, 51, 0.795);
     font-weight: bolder;
     font-size: xx-large;
 }
@@ -19,18 +19,59 @@ input{
     border-radius: 5px;
 }
 
+.column{
+    width: 90%;
+}
+
 .list, .form {
+    // background-color: rgb(255, 243, 228);
     font-family: 'Flamenco', cursive;
     font-weight: xx-bold;
     font-size: x-large;
     vertical-align: bottom;
+    width: 100%;
 }
 
-.Tasks {
+h1 {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    width: min-content;
+    margin: auto;
+    margin-bottom: 1em;
+}
+ul {
+    background-color: rgb(255, 243, 228);
+    border-radius: 5px;
+    padding-left: 0;
+}
+
+.taskRow{
+    background-color: rgb(255, 243, 228);
+    border-radius: 5px;
+}
+.taskRow:hover{
+    background-color: rgb(253, 225, 192);
+}
+
+// .col {
+//     background-color: rgb(255, 243, 228);
+// }
+.tasks {
     color: rgba(128, 128, 128, 0.74);
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa', cursive;   
+
+}
+
+.x {
+    background-color: rgba(206, 195, 180, 0.301);
 }
 
 .btn {
     font-family: 'Comfortaa', cursive;
 }
+
+
+// em{
+//     background-color: rgb(255, 255, 255);
+// }
+
