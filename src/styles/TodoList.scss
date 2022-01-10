@@ -24,14 +24,13 @@ input{
 }
 
 .list, .form {
-    background-color: rgb(255, 243, 228);
+    // background-color: rgb(255, 243, 228);
     font-family: 'Flamenco', cursive;
     font-weight: xx-bold;
     font-size: x-large;
     vertical-align: bottom;
     width: 100%;
 }
-
 
 h1 {
     background-color: rgb(255, 255, 255);
@@ -43,12 +42,20 @@ h1 {
 ul {
     background-color: rgb(255, 243, 228);
     border-radius: 5px;
-
+    padding-left: 0;
 }
 
-.col {
+.taskRow{
     background-color: rgb(255, 243, 228);
+    border-radius: 5px;
 }
+.taskRow:hover{
+    background-color: rgb(253, 225, 192);
+}
+
+// .col {
+//     background-color: rgb(255, 243, 228);
+// }
 .tasks {
     color: rgba(128, 128, 128, 0.74);
     font-family: 'Comfortaa', cursive;   
@@ -64,6 +71,7 @@ ul {
 }
 
 
-em{
-    background-color: rgb(255, 255, 255);
-}
+// em{
+//     background-color: rgb(255, 255, 255);
+// }
+

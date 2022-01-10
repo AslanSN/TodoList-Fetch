@@ -101,9 +101,7 @@ const TodoList = () => {
 	 */
 	const checker = i => {
 		list[i].done = !list[i].done;
-		setList(...list);
-		console.log(`Checker i:`, i);
-		console.log(`Checker's list`, list[i]);
+		setList([...list]);
 	};
 
 	/**
@@ -112,9 +110,13 @@ const TodoList = () => {
 	 * @param {index} i
 	 */
 	const listing = (value, i) => (
-		<div key={i} className="row m-1">
+		<div key={i} className="row taskRow m-1">
 			<div className="col col-sm-10 col-lg-10">
-				<li className="list text-break align-bottom d-inline">
+				<li
+					className={
+						"list text-break align-bottom d-inline" +
+						(value.done ? "crossed" : "")
+					}>
 					{value.label} {console.log(i)}
 				</li>
 			</div>
