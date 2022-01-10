@@ -7,66 +7,42 @@ import "../../styles/TodoList.scss";
  * @returns Component containing a todo task register
  */
 const TodoList = () => {
-	const [list, setList] = useState([]);
-	const [used, setUsed] = useState(0);
-	const [error, setError] = useState("");
-
+	function ErrorObj(ctrl, message = null) {
+		this.ctrl = ctrl;
+		this.message = message;
+	}
 	function Task(label, done) {
 		(this.label = label), (this.done = done);
 	}
 
+	const [list, setList] = useState([]);
+	const [used, setUsed] = useState(0);
+	const [error, setError] = useState(new ErrorObj(false));
+	const url = "https://assets.breatheco.de/apis/fake/todos/user/aslan";
+
 	useEffect(() => {
-		list.length == 0
-			? fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
-					method: "POST",
-					headers: {
-						Accept: "application/json"
-					},
-					body: list
-			  })
-					.then(setUsed(+1))
-					.catch(err => {
-						setError(err);
-						console.error(error);
-					})
-			: fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
-					method: "GET",
-					headers: {
-						Accept: "application/json"
-					}
-			  })
-					.then(response => {
-						response.json();
-					})
-					.then(data => {
-						setList(data);
-						setUsed(+1);
-					})
-					.catch(err => {
-						setError(err);
-						console.error(error);
-					});
+		fetch(url, {
+			method: "GET",
+			headers: {
+				Accept: "application/json"
+			}
+		})
+			.then(response => response.json())
+			.then(data => setList(data))
+			.then(() => setUsed(+1))
+			.catch(err => setError(new ErrorObj(true, String(err))));
 	}, []);
 
 	useEffect(() => {
 		used >= 1
-			? fetch("https://assets.breatheco.de/apis/fake/todos/aslan", {
+			? fetch(url, {
 					method: "PUT",
+					body: JSON.stringify(list),
 					headers: {
-						Accept: "application/json"
-					},
-					body: list
-			  })
-					.then(response => {
-						response.json();
-					})
-					.then(setUsed(+1))
-					.catch(err => {
-						setError(err);
-						console.log(error);
-					})
-			: null &&
-			  console.log(`Used should be still be more than 1: ${used}`);
+						"Content-Type": "application/json"
+					}
+			  }).catch(err => setError(new ErrorObj(true, String(err))))
+			: null;
 	}, [list]);
 
 	/**
@@ -82,7 +58,7 @@ const TodoList = () => {
 		}
 
 		if (newTask.label.length > 0) {
-			setList([...list, newTask.label]);
+			setList([...list, newTask]);
 			ev.target.value = "";
 		}
 	};
@@ -105,31 +81,6 @@ const TodoList = () => {
 	const eraseAll = () => setList(list.splice());
 
 	/**
-	 * !Creates a list from an array
-	 * @param {string} value
-	 * @param {index} i
-	 */
-	const listing = (value, i) => (
-		<div className="row m-1">
-			<div className="col col-sm-11 col-lg-11">
-				<li
-					key={i.toString()}
-					className="list text-break align-bottom d-inline">
-					{value}{" "}
-				</li>
-			</div>
-			<div className="col align-middle col-sm-1 col-lg-1">
-				<button
-					type="button"
-					className="col x btn align-middle d-inline"
-					onClick={() => erase(i)}>
-					X
-				</button>
-			</div>
-		</div>
-	);
-
-	/**
 	 * !Tasks counter
 	 * @param {Array} list
 	 * @returns task number in HTML
@@ -142,6 +93,53 @@ const TodoList = () => {
 		) : (
 			""
 		);
+
+	/**
+	 *!Checker
+	 *? Changes the value.done to his reverse
+	 * @param {integer} i
+	 */
+	const checker = i => {
+		list[i].done = !list[i].done;
+		setList(...list);
+		console.log(`Checker i:`, i);
+		console.log(`Checker's list`, list[i]);
+	};
+
+	/**
+	 * !Creates a list from an array
+	 * @param {string} value
+	 * @param {index} i
+	 */
+	const listing = (value, i) => (
+		<div key={i} className="row m-1">
+			<div className="col col-sm-10 col-lg-10">
+				<li className="list text-break align-bottom d-inline">
+					{value.label} {console.log(i)}
+				</li>
+			</div>
+
+			<div className="col align-middle col-sm-1 col-lg-1">
+				<input
+					className="form-check-input align-middle"
+					type="checkbox"
+					value=""
+					id="flexCheckDefault"
+					checked={value.done ? "checked" : ""}
+					onChange={() => checker(i)}
+				/>
+			</div>
+
+			<div className="col align-middle col-sm-1 col-lg-1">
+				<button
+					type="button"
+					className="col x btn align-middle d-inline"
+					onClick={() => erase(i)}>
+					X
+				</button>
+			</div>
+		</div>
+	);
 
 	return (
 		<>
