@@ -55,6 +55,7 @@ useEffect(() => {
 
 ## Output
 
+<img src="./src/resources/TodoListReact&FetchPreview.png" alt="Aslan's Demo of the REACT TODO LIST with FETCH" width="975">
 
 ------------
 
