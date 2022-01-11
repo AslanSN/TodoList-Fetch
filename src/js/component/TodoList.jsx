@@ -20,6 +20,10 @@ const TodoList = () => {
 	const [error, setError] = useState(new ErrorObj(false));
 	const url = "https://assets.breatheco.de/apis/fake/todos/user/aslan";
 
+	/**
+	 * !On Load usuEffect
+	 * ?Calls an API GET and returns a change on the flag "Used"
+	 */
 	useEffect(() => {
 		fetch(url, {
 			method: "GET",
@@ -33,6 +37,10 @@ const TodoList = () => {
 			.catch(err => setError(new ErrorObj(true, String(err))));
 	}, []);
 
+	/**
+	 * !On List Change useEffect
+	 * ?Calls a PUT when the flag "used" is equal or more than 1
+	 */
 	useEffect(() => {
 		used >= 1
 			? fetch(url, {
