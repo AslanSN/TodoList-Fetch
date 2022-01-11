@@ -5,7 +5,8 @@ After doing the React todo list we had to add some functionalities as an API and
 ### Previoulsy...
 > Exercise where we had to copy with our own code this template: 
 >
-> [![Template](https://raw.githubusercontent.com/breatheco-de/exercise-todo-list/master/preview.gif)](http://https://raw.githubusercontent.com/breatheco-de/exercise-todo-list/master/preview.gif)
+><img src="https://raw.githubusercontent.com/breatheco-de/exercise-todo-list/master/preview.gif" alt="Demo TODO list 4Geeks" width="500">
+>
 >
 > #### My code
 > So I did all the functions shown plus a dark button to erase all the task list. 
@@ -55,7 +56,7 @@ useEffect(() => {
 
 ## Output
 
-<img src="./src/resources/TodoListReact&FetchPreview.png" alt="Aslan's Demo of the REACT TODO LIST with FETCH" width="975">
+<img src="./src/resources/TodoListReact&FetchPreview.png" alt="Aslan's Demo of the REACT TODO LIST with FETCH" width="1000">
 
 ------------
 
