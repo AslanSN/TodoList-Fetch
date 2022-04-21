@@ -2,7 +2,7 @@
 
 After doing the React todo list we had to add some functionalities as an API and an `Erase all` button, which I had previously added. 
 
-### Previoulsy...
+### Previoulsy: https://github.com/AslanSN/todo-list ...
 > Exercise where we had to copy with our own code this template: 
 >
 ><img src="https://raw.githubusercontent.com/breatheco-de/exercise-todo-list/master/preview.gif" alt="Demo TODO list 4Geeks" width="500">
