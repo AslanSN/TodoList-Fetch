@@ -25,33 +25,33 @@ I added two useEffect() functions that marks up when they must be called. With a
 - The first one is for the screen's `onLoad` which has the `GET fetch` that adds a `+1` to the `flag var`.
 ```JavaScript
 useEffect(() => {
-		fetch(url, {
-			method: "GET",
-			headers: {
-				Accept: "application/json"
-			}
-		})
-			.then(response => response.json())
-			.then(data => setList(data))
-			.then(() => setUsed(+1))
-			.catch(err => setError(new ErrorObj(true, String(err))));
-	}, []);
+	fetch(url, {
+		method: "GET",
+		headers: {
+			Accept: "application/json"
+		}
+	})
+		.then(response => response.json())
+		.then(data => setList(data))
+		.then(() => setUsed(+1))
+		.catch(err => setError(new ErrorObj(true, String(err))));
+}, []);
 ```
 
 - The second is for when the `list` of `Task`s is changed it has a `PUT fetch` that saves the `task's list` on the `Server` with a `ternary conditional` to be initiated. Due to that the first change ever in the program life will not `"wake up"` the `PUT` loading.
 
 ```JavaScript
 useEffect(() => {
-		used >= 1
-			? fetch(url, {
-					method: "PUT",
-					body: JSON.stringify(list),
-					headers: {
-						"Content-Type": "application/json"
-					}
-			  }).catch(err => setError(new ErrorObj(true, String(err))))
-			: null;
-	}, [list]);
+	used >= 1
+		? fetch(url, {
+				method: "PUT",
+				body: JSON.stringify(list),
+				headers: {
+					"Content-Type": "application/json"
+				}
+		  }).catch(err => setError(new ErrorObj(true, String(err))))
+		: null;
+}, [list]);
 ```
 
 ## Output
