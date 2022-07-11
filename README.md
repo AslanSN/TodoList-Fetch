@@ -44,11 +44,11 @@ useEffect(() => {
 useEffect(() => {
 	used >= 1
 		? fetch(url, {
-				method: "PUT",
-				body: JSON.stringify(list),
-				headers: {
-					"Content-Type": "application/json"
-				}
+			method: "PUT",
+			body: JSON.stringify(list),
+			headers: {
+				"Content-Type": "application/json"
+			}
 		  }).catch(err => setError(new ErrorObj(true, String(err))))
 		: null;
 }, [list]);
